@@ -63,7 +63,7 @@ RESULTS_BACKEND = FileSystemCache("/app/superset_home/sqllab")
 
 CACHE_CONFIG = {
     "CACHE_TYPE": "RedisCache",
-    "CACHE_DEFAULT_TIMEOUT": 300,
+    "CACHE_DEFAULT_TIMEOUT": 86400,
     "CACHE_KEY_PREFIX": "superset_",
     "CACHE_REDIS_HOST": REDIS_HOST,
     "CACHE_REDIS_PORT": REDIS_PORT,
@@ -92,7 +92,15 @@ class CeleryConfig:
 
 CELERY_CONFIG = CeleryConfig
 
-FEATURE_FLAGS = {"ALERT_REPORTS": True}
+FEATURE_FLAGS = {
+                "ALERT_REPORTS": True,
+                'ENABLE_CORS':True,
+                'CLIENT_CACHE': True,
+                'ENABLE_EXPLORE_JSON_CSRF_PROTECTION': False,
+                'PRESTO_EXPAND_DATA': False,
+                }
+
+
 ALERT_REPORTS_NOTIFICATION_DRY_RUN = True
 WEBDRIVER_BASEURL = "http://superset:8088/"
 # The base URL for the email report hyperlinks.
