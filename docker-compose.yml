@@ -59,20 +59,17 @@ services:
       - db_home:/var/lib/postgresql/data
       - ./docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
 
-  dbSQL:
-    env_file: docker/.env
-    image: mysql:8.0
-    container_name: mysql_db
-    restart: unless-stopped
+  db2:
+    image: postgres:14.8-alpine3.18
     environment:
-      - MYSQL_DATABASE=dataBaseSQL
-      - MYSQL_ROOT_PASSWORD=1qaSW@3ed
+      POSTGRES_DB: "habrdb"
+      POSTGRES_USER: "habrpguser"
+      POSTGRES_PASSWORD: "pgpwd4habr"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
     ports:
-      - "127.0.0.1:3306:3306"
+      - "3306:3306"
     volumes:
-      - db_home:/var/lib/mysql/data
-      # - ./docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-
+      -  db_home:/var/lib/mypostgresql/data
 
   superset:
     env_file: docker/.env
